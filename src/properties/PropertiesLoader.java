@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class PropertiesLoader {
+	public static final String RESOURCESDIR = "Resources\\";
+	public static final String PROPERTIES_FILE_NAME = "properties.xml";
 	private static PropertiesLoader instance;
 	private Properties properties;
 	
@@ -15,7 +17,7 @@ public class PropertiesLoader {
 	private PropertiesLoader() 
 	{
 		try {
-			XMLDecoder decoder = new XMLDecoder(new FileInputStream("properties.xml"));
+			XMLDecoder decoder = new XMLDecoder(new FileInputStream(RESOURCESDIR + PROPERTIES_FILE_NAME));
 			properties = (Properties)decoder.readObject();
 			decoder.close();
 		} catch (FileNotFoundException e) {

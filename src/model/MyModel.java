@@ -28,6 +28,7 @@ import properties.Properties;
 import properties.PropertiesLoader;
 
 public class MyModel extends Observable implements Model {
+	private static final String RESOURCESDIR = "Resources\\";
 	
 	private ExecutorService executor;
 	private Map<String, Maze3d> mazes = new ConcurrentHashMap<String, Maze3d>();
@@ -101,14 +102,14 @@ public class MyModel extends Observable implements Model {
 	
 	@SuppressWarnings("unchecked")
 	private void loadSolutions() {
-		File file = new File("solutions.dat");
+		File file = new File(RESOURCESDIR+"solutions.dat");
 		if (!file.exists())
 			return;
 		
 		ObjectInputStream ois = null;
 		
 		try {
-			ois = new ObjectInputStream(new GZIPInputStream(new FileInputStream("solutions.dat")));
+			ois = new ObjectInputStream(new GZIPInputStream(new FileInputStream(RESOURCESDIR+"solutions.dat")));
 			mazes = (Map<String, Maze3d>)ois.readObject();
 			solutions = (Map<String, Solution<Position>>)ois.readObject();		
 		} catch (FileNotFoundException e) {
@@ -133,7 +134,7 @@ public class MyModel extends Observable implements Model {
 	private void saveSolutions() {
 		ObjectOutputStream oos = null;
 		try {
-		    oos = new ObjectOutputStream(new GZIPOutputStream(new FileOutputStream("solutions.dat")));
+		    oos = new ObjectOutputStream(new GZIPOutputStream(new FileOutputStream(RESOURCESDIR+"solutions.dat")));
 			oos.writeObject(mazes);
 			oos.writeObject(solutions);			
 			

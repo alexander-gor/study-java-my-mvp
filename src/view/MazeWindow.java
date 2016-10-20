@@ -34,6 +34,7 @@ import algorithms.mazeGenerators.Maze3d;
 import algorithms.mazeGenerators.Position;
 import algorithms.search.Solution;
 import algorithms.search.State;
+import properties.PropertiesLoader;
 
 public class MazeWindow extends BasicWindow implements View {
 
@@ -191,7 +192,7 @@ public class MazeWindow extends BasicWindow implements View {
 	        fd.setFilterExtensions(filterExt);
 	        String selected = fd.open();
 	        File source = new File(selected);
-	        File dest = new File("properties.xml");
+	        File dest = new File(PropertiesLoader.RESOURCESDIR + PropertiesLoader.PROPERTIES_FILE_NAME);
 
 	        try {
 				Files.copy(source.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
